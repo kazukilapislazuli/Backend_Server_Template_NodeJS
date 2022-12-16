@@ -1,6 +1,6 @@
-const ErrorResponse = require('../../util/errorResponse');
 const asyncHandler = require('../../middleware/async');
 const User = require('../user/model');
+const {errorResponse, successResponse} = require("../../util/response");
 
 exports.register = asyncHandler(async (req, res, next)=>{
     const {name, email, password, username} = req.body;
@@ -13,21 +13,21 @@ exports.login = asyncHandler(async (req, res, next) => {
 
     // Validate email & password
     if (!email || !password) {
-        return next(new ErrorResponse('Please provide an email and password', 400));
+        return res.status(400).json(errorResponse("Please provide an email and password"));
     }
 
     // Check for user
     const user = await User.findOne({email}).select('+password');
 
     if (!user) {
-        return next(new ErrorResponse('Invalid credentials', 401));
+        return res.status(401).json(errorResponse("Invalid credentials"));
     }
 
     // Check if password matches
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
-        return next(new ErrorResponse('Invalid credentials', 401));
+        return res.status(401).json(errorResponse("Invalid credentials"));
     }
     sendTokenResponse(user, 200, res);
 });
@@ -49,7 +49,7 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
     // Check current password
     if (!(await user.matchPassword(req.body.currentPassword))) {
-        return next(new ErrorResponse('Password is incorrect', 401));
+        return res.status(401).json(errorResponse("Password is incorrect"));
     }
 
     user.password = req.body.newPassword;
@@ -67,5 +67,5 @@ const sendTokenResponse = (user, statusCode, res) => {
         httpOnly: true,
         secure: true
     };
-    res.status(statusCode).cookie('token', token, options).json({success: true, token});
+    res.status(statusCode).cookie('token', token, options).json(successResponse({token}, 1, 1));
 };

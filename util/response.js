@@ -10,3 +10,16 @@ exports.successResponse = (result, count = 0, total = 0, msg = 'Success', status
         error: null
     }
 }
+
+exports.errorResponse = (msg = 'Data not found', status = 404, data = null) => {
+    return {
+        success: false,
+        data,
+        status: status,
+        time: Date.now(),
+        error: {
+            code: status,
+            message: msg
+        }
+    }
+}
