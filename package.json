@@ -1,0 +1,47 @@
+{
+  "name": "backend-server-template",
+  "version": "1.0.0",
+  "description": "A template for Backend Server using NodeJS and Express",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js ",
+    "dev": "NODE_ENV=development nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kazukilapislazuli/backend_server_template.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "Backend",
+    "Express",
+    "MongoDB"
+  ],
+  "author": "Snehasis Sahoo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kazukilapislazuli/backend_server_template/issues"
+  },
+  "homepage": "https://github.com/kazukilapislazuli/backend_server_template#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.2.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-rate-limit": "^6.5.2",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "log-timestamp": "^0.3.0",
+    "mongoose": "^6.5.4",
+    "path": "^0.12.7",
+    "request-ip": "^3.3.0",
+    "xss": "^1.0.9",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
